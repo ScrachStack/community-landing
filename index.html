@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+
+    <title>RP Server Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+            #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #preloader .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid transparent;
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-image: url('YOURIMAGE.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        header, nav, section {
+            position: relative;
+            z-index: 1;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        nav {
+            background-color: transparent;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 1em;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 0 15px;
+            font-weight: 600;
+        }
+        section.container {
+            margin: 1em;
+            padding: 1em;
+            max-width: 900px;
+            margin: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            color: white;
+        }
+        .btn {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+        }
+section.container {
+    margin-top: 50px; 
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+    #cookieConsentBanner {
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1em;
+    text-align: center;
+    z-index: 1000;
+}
+
+
+#cookieConsentBanner button {
+    background-color: blue;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    margin-left: 1em;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<div id="cookieConsentBanner" style="display:none;">
+    <p>We use cookies to improve your experience. By using our website, you consent to our use of cookies.</p>
+    <button id="acceptCookie">OK</button>
+</div>
+<div id="preloader">
+    <div class="loader"></div>
+</div>
+
+<body>
+
+    <div class="background"></div>
+
+    <header>
+        <h1>PutYourHandsUP RP</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Departments</a>
+        <a href="#">Contact</a>
+        <a href="#">Discord</a>
+    </nav>
+
+    <section class="container">
+        <h2>Welcome to PutYourHandsUP !</h2>
+        <p>This is a place where you can immerse yourself in a role-playing experience.</p>
+
+<div class="close-btn">X</div>
+
+        <h2>Features</h2>
+        <ul>
+            <li>24/7 Uptime</li>
+       
+        </ul>
+ 
+        <h2>Join Us</h2>
+        <a id="copyIPButton" class="btn">Join Now</a>
+    </section>
+
+    <script>
+
+setTimeout(function() {
+                $('#preloader').fadeOut('slow', function() {
+                    $(this).remove();
+                });
+            }, 2000); 
+        $(document).ready(function() {
+            if (Cookies.get('hideContainer') === 'true') {
+                $('.container').hide();
+            }
+    
+            $('.close-btn').click(function() {
+                $('.container').fadeOut('slow', function() {
+
+                    Cookies.set('hideContainer', 'true', { expires: 7 });
+                });
+            });
+        });
+$(document).ready(function() {
+
+    if (Cookies.get('cookieConsent') !== 'true') {
+        $('#cookieConsentBanner').show();
+    }
+
+    $('#acceptCookie').click(function() {
+        $('#cookieConsentBanner').hide();
+        Cookies.set('cookieConsent', 'true', { expires: 365 }); 
+    });
+});
+
+        function copyToClipboard(text) {
+            var tempInput = document.createElement('input');
+            tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+        }
+
+        $('#copyIPButton').click(function() {
+            var serverIP = 'SERVER_IP';  
+            copyToClipboard(serverIP);
+            alert("Server IP copied to clipboard.");
+        });
+
+    </script>
+    
+
+</body>
+</html>
